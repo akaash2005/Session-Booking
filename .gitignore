@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.env
+venv/
+env/
+.venv/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Node
+node_modules/
+dist/
+build/
+.npm
+
+# Docker
+.dockerignore
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db

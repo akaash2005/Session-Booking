@@ -13,6 +13,8 @@ and creators can publish and manage their own sessions.
 | Reverse Proxy  | Nginx                             |
 | Auth           | OAuth 2.0 (Google/GitHub) + JWT   |
 | Infrastructure | Docker + Docker Compose           |
+|Image storage   | MINIIO                            |
+|Payment         | RazorPay                          |
 
 ---
 
@@ -54,6 +56,7 @@ That's it. One command starts all 4 containers.
 | Backend API| http://localhost/api         |
 | Django Admin| http://localhost/admin      |
 | Backend direct | http://localhost:8000   |
+|Image DB      |  http://localhost:9001     |
 
 ### 4. Create a superuser (optional, for admin access)
 

@@ -1,0 +1,14 @@
+from rest_framework import serializers
+from .models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username', 'first_name',
+                  'last_name', 'role', 'avatar', 'bio']
+        read_only_fields = ['id', 'email']
+
+class UpdateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'bio', 'role']

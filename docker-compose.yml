@@ -39,10 +39,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      minio:
+        condition: service_healthy
     networks:
       - sessions_network
     command: >
       sh -c "python manage.py migrate &&
+             python manage.py init_minio &&
              python manage.py runserver 0.0.0.0:8000"
 
   frontend:
@@ -77,9 +80,33 @@ services:
     networks:
       - sessions_network
 
+  minio:
+    image: minio/minio:latest
+    container_name: sessions_minio
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio_data:/minio_data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - sessions_network
+    command: server /minio_data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   postgres_data:
   media_files:
+  minio_data:
 
 networks:
   sessions_network:
